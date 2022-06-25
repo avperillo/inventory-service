@@ -3,9 +3,6 @@ using Inventory.Domain.Aggregates.Items;
 using Inventory.Infrastructure.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,9 +18,10 @@ namespace Inventory.Infrastructure
             builder.ApplyConfiguration(new ItemEntityTypeConfiguration());
         }
 
-        public Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            _ = await base.SaveChangesAsync(cancellationToken);
+            return true;
         }
     }
 }
