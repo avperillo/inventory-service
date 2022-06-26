@@ -13,6 +13,9 @@ namespace Inventory.Infrastructure
     {
         public DbSet<Item> Items { get; set; }
 
+        public InventoryContext(DbContextOptions<InventoryContext> options)
+       : base(options) { }
+
         protected override void OnModelCreating (ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ItemEntityTypeConfiguration());

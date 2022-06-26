@@ -1,4 +1,5 @@
-﻿using Inventory.Domain.Aggregates.Items;
+﻿using DDD.abstracts;
+using Inventory.Domain.Aggregates.Items;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,7 +16,10 @@ namespace Inventory.Infrastructure.EntityTypeConfiguration
                 .ValueGeneratedOnAdd();
 
             builder.Property(b => b.ExpirationDate);
-            builder.Property(b => b.Type);
+            builder.Property(b => b.Type)
+                .HasConversion(
+                v => v.Id,
+                v => Enumeration.FromValue<ItemType>(v));
 
         }
     }

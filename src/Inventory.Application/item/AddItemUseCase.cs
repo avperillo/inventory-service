@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inventory.Application.item
 {
-    public class AddItemUseCase
+    public class AddItemUseCase : IAddItemUseCase
     {
         private readonly IItemRepository repo;
 

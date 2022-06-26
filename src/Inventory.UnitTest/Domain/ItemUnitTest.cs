@@ -22,7 +22,7 @@ namespace Inventory.UnitTest.Domain
         }
 
         [Fact]
-        public void ThrowArgumentException_WhenNameIsEmpty()
+        public void ThrowArgumentException_WhenNameIsNullOrEmpty()
         {
             DateTime expiration = DateTime.Now.AddYears(1);
 
