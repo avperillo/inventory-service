@@ -8,6 +8,9 @@ using Inventory.Infrastructure;
 using Inventory.Domain.Aggregates.Items;
 using Inventory.Infrastructure.Repositories;
 using Inventory.Application.item;
+using Mapster;
+using Inventory.API.Shared;
+using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -31,5 +34,16 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IAddItemUseCase, AddItemUseCase>();
             return services;
         }
+
+        public static IServiceCollection AddMapper(this IServiceCollection services)
+        {
+            Assembly applicationAssembly = typeof(MapeableDto<,>).Assembly;
+
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.Scan(applicationAssembly);
+            return services;
+        }
+
+
     }
 }

@@ -9,6 +9,8 @@ namespace Inventory.Domain.Aggregates.Items
         public DateTime ExpirationDate { get; private set; }
         public ItemType Type { get; private set; } = ItemType.Unknow;
 
+        public Item() { }
+
         public Item(string name, DateTime expirationDate, ItemType type)
         {
             EnsureNameIsNotNullOrEmpty(name);

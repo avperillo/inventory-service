@@ -1,8 +1,10 @@
-﻿using Inventory.Application.item;
+﻿using DDD.abstracts;
+using Inventory.API.Controllers.Item.Dtos;
+using Inventory.Application.item;
 using Inventory.Domain.Aggregates.Items;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace Inventory.API.Controllers.Item
@@ -21,11 +23,11 @@ namespace Inventory.API.Controllers.Item
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddItem()
+        public async Task<IActionResult> AddItem([FromBody] AddItemDto cmd)
         {
-            var item = await useCase.Create("pruebica", ItemType.Unknow, DateTime.Now);
+            var item = await useCase.Create(cmd.Name, Enumeration.FromValue<ItemType>(cmd.ItemType), cmd.ExpirationDate);
 
-            return Ok(item);
+            return Ok(item.Adapt<ItemDto>());
         }
 
     }
