@@ -1,15 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Inventory.Infrastructure;
-using Inventory.Domain.Aggregates.Items;
-using Inventory.Infrastructure.Repositories;
-using Inventory.Application.item;
-using Mapster;
+﻿using FluentValidation.AspNetCore;
+using Inventory.API;
 using Inventory.API.Shared;
+using Inventory.Application.item;
+using Inventory.Domain.Aggregates.Items;
+using Inventory.Infrastructure;
+using Inventory.Infrastructure.Repositories;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -18,7 +15,13 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddFluentValidation(options =>
+                {
+                    options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                }
+                );
             return services;
         }
 
