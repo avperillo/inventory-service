@@ -32,6 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IAddItemUseCase, AddItemUseCase>();
+            services.AddScoped<IRemoveItemUseCase, RemoveItemUseCase>();
             return services;
         }
 

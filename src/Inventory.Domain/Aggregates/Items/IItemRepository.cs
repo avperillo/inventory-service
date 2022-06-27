@@ -8,5 +8,6 @@ namespace Inventory.Domain.Aggregates.Items
         Item Add(Item item);
         void Remove(Item item);
         Task<Item> GetBy(int id);
+        Item GetBy(string name);
     }
 }

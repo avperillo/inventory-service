@@ -2,6 +2,7 @@
 using Inventory.Domain.Aggregates.Items;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,9 +31,15 @@ namespace Inventory.Infrastructure.Repositories
             return await context.Items.FindAsync(id);
         }
 
+        public Item GetBy(string name)
+        {
+            return context.Items.Single(i => i.Name == name);
+        }
+
         public void Remove(Item item)
         {
-            throw new NotImplementedException();
+            context.Items.Remove(item);
         }
+
     }
 }
