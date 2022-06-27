@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DDD.abstracts\DDD.abstracts.csproj" />
+    <ProjectReference Include="..\EventBus\EventBus.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using FluentValidation.AspNetCore;
+﻿using EventBus;
+using EventBus.Contracts;
+using FluentValidation.AspNetCore;
 using Inventory.API;
 using Inventory.API.Infrastructure.Filters;
 using Inventory.API.Shared;
@@ -53,6 +55,10 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-
+        public static IServiceCollection AddEventBus(this IServiceCollection services)
+        {
+            services.AddScoped<IEventBus, FakeEventBus>();
+            return services;
+        }
     }
 }
