@@ -1,5 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using Inventory.API;
+using Inventory.API.Infrastructure.Filters;
 using Inventory.API.Shared;
 using Inventory.Application.item;
 using Inventory.Domain.Aggregates.Items;
@@ -16,7 +17,11 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
             services
-                .AddControllers()
+                .AddControllers(options =>
+                {
+                    options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+                })
+                .AddNewtonsoftJson()
                 .AddFluentValidation(options =>
                 {
                     options.RegisterValidatorsFromAssemblyContaining<Startup>();
