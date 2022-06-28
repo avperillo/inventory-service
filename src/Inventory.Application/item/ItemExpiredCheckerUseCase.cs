@@ -29,7 +29,7 @@ namespace Inventory.Application.item
         {
             var items = repo.FindExpired();
 
-            logger.LogInformation("Found expired items [{items}]", string.Join(", ", items.Select(i => i.Id)));
+            logger.LogInformation("Found expired items [{items}]", string.Join(", ", items.Select(i => i.Name)));
 
             foreach (var item in items)
             {
