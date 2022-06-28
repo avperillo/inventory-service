@@ -2,9 +2,7 @@
 using Inventory.Domain.Aggregates.Items;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Inventory.Infrastructure.Repositories
@@ -41,5 +39,11 @@ namespace Inventory.Infrastructure.Repositories
             context.Items.Remove(item);
         }
 
+        public IEnumerable<Item> FindExpired()
+        {
+            return context.Items
+                .Where(i => i.ExpirationDate < DateTime.Today)
+                .ToList();
+        }
     }
 }
