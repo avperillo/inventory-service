@@ -1,3 +1,5 @@
+using Inventory.Infrastructure;
+using Inventory.Infrastructure.Seed;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +44,11 @@ namespace Inventory.API
             {
                 endpoints.MapControllers();
             });
+
+            // populate data
+            var scopeeee = app.ApplicationServices.CreateScope();
+            var context = scopeeee.ServiceProvider.GetRequiredService<InventoryContext>();
+            DataSeed.Seed(context);
         }
     }
 }

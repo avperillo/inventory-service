@@ -4,6 +4,7 @@ using Inventory.Application.item;
 using Inventory.Domain.Aggregates.Items;
 using Inventory.Infrastructure;
 using Inventory.Infrastructure.Repositories;
+using Inventory.Infrastructure.Seed;
 using Inventory.Worker.Jobs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,11 @@ namespace Inventory.Worker
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+
+            // populate data
+            var scopeeee = app.ApplicationServices.CreateScope();
+            var context = scopeeee.ServiceProvider.GetRequiredService<InventoryContext>();
+            DataSeed.Seed(context);
         }
     }
 }
